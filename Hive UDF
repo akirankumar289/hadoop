@@ -1,0 +1,43 @@
+Executing UDF in Hive.
+
+Step 1 :-
+
+Right click on program —> Export —> create Jar
+
+Step 2 :-
+
+Open Hive Terminal—-> add jar to your current Hive location path
+
+Add jar jarname;
+
+Step 3 :-
+
+Create a temporary function In hive terminal
+
+CREATE TEMPORARY FUNCTION replaceword as ‘dateudf1.ReplaceNum1′;
+
+dateudf1 represents the package name of program and ReplaceNum1 represents the program name and both are should be case sensitive.
+
+Step 4 :-
+
+create a Database and load related matching data into Hive table.
+
+Source code	   
+CREATE TABLE names(fname string,lname string) row format delimited FIELDS terminated BY '\t' stored AS textfile
+
+ 
+
+Input Data
+
+mahesh chimmiri
+rajesh chimmiri
+
+Load the input file from local to table
+
+load data local inpath ‘names.txt’ into table names;
+
+Step 5 :-
+
+select replaceword(fname,”rajesh”,”suresh”) from names;
+
+fname represents the table column name rajesh is original data in table and suresh is replacing word  names represents the table name.
